@@ -8,7 +8,8 @@ class App  extends React.Component {
     this.state = {
       ram: 1,
       storage: 50,
-      disk_type: "hdd"
+      disk_type: "hdd",
+      rent_cost: 0
     }
   }
 
@@ -29,9 +30,8 @@ class App  extends React.Component {
   }
 
   UpdateDiskType(e){
-    alert(e.target.value);
     this.setState({
-      disk_type: parseInt(e.target.value)
+      disk_type: e.target.value
     }, () => this.CalculatePrice());
   }
 
@@ -42,7 +42,7 @@ class App  extends React.Component {
       })
     } else {
       this.setState({
-        rent_cost: 60*this.state.ram + 2*this.state.storage
+        rent_cost: 60*this.state.ram + 1.5*this.state.storage
       })
     }
   }
@@ -87,9 +87,9 @@ class App  extends React.Component {
     <br/>
 
     <label>Hard disk</label>
-    <input type="radio" name="disk_type" value="hdd" onChange={ (e) => this.UpdateDiskType(e) } checked></input>
+    <input type="radio" name="disk_type" value="hdd" checked={this.state.disk_type === "hdd"} onChange={ (e) => this.UpdateDiskType(e) }></input>
     <label>SSD</label>
-    <input type="radio" name="disk_type" value="ssd" onChange={ (e) => this.UpdateDiskType(e) }></input>
+    <input type="radio" name="disk_type" value="ssd" checked={this.state.disk_type === "ssd"} onChange={ (e) => this.UpdateDiskType(e) }></input>
 
     <br/>
 
